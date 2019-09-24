@@ -84,7 +84,7 @@ export default {
      */
     generateCode(method, http) {
       // get请求的参数
-      if(method === 'GET' && http === 'req') {
+      if(http === 'req') {
         let obj = []
         if(!this.apiDetail.parameters) {
           return '没有参数'
@@ -167,7 +167,7 @@ export default {
             this[`tmpArrTag${this.tmpNum}`] = true
             let childSchema = schemaDetail.properties[prop].items.$ref.split('/')
             childSchema = childSchema[childSchema.length - 1]
-            this.recusionSchma(childSchema, this[`tmpArr${this.tmpNum}`])
+            return this.recusionSchma(childSchema, this[`tmpArr${this.tmpNum}`])
           } else {
             obj.push(`"${prop}": [${schemaDetail.properties[prop].items.type}], ${this.generateNotes(schemaDetail,prop)}`)
           }
